@@ -14,6 +14,8 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 chart_df = pd.read_csv('chart_data.csv', index_col=0)
 
+chart_df['Token'] = [chart_df['Song Links'][item].split('/')[-1] for item in range(0, len(chart_df['Song Links']))]
+
 chart_df.dropna(axis=0, how='any', subset=['Artist'], inplace=True)
 
 chart_df.drop(labels=['Song Links'], axis=1, inplace=True)
